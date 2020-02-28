@@ -20,12 +20,38 @@ class CostOfEngagementComparisonComponent extends Component {
                 pricesNearShoreOnSite={this.state.pricesNearShoreOnSite}
                 pricesOffShoreOnSite={this.state.pricesOffShoreOnSite}
                 pricesOffShoreOffSite={this.state.pricesOffShoreOffSite}
-
             />
         )
     }
 
     state = {
+        pricesInHouse: [],
+        pricesNearShoreOffSite: [],
+        pricesNearShoreOnSite: [],
+        pricesOffShoreOffSite: [],
+        pricesOffShoreOnSite: [],
+       
+    };
+    
+        componentDidMount() {
+            fetch('http://10.16.0.125:1338/vmt/prices')
+                .then(res => res.json())
+                .then((data) => {
+                    this.setState({ 
+                        pricesInHouse: data.response[0],
+                        pricesNearShoreOffSite: data.response[1],
+                        pricesNearShoreOnSite: data.response[2],
+                        pricesOffShoreOffSite: data.response[3], 
+                        pricesOffShoreOnSite: data.response[4]
+                        
+                    })
+                })
+                .catch(console.log)
+        }
+}
+
+export default CostOfEngagementComparisonComponent
+ /* state = {
         pricesInHouse: {
             "type":"In-House",
             "jr": 65,
@@ -71,67 +97,4 @@ class CostOfEngagementComparisonComponent extends Component {
             "engMan": 125,
             "qa": 0
         }
-    };
-    
-    /*    componentDidMount() {
-            fetch('http://10.16.0.64:9999/prices')
-                .then(res => res.json())
-                .then((data) => {
-                    this.setState({ 
-                        pricesInHouse: data[0],
-                        pricesNearShore: data[1],
-                        pricesOffShore: data[2]   
-                    })
-                })
-                .catch(console.log)
-        }*/
-}
-
-export default CostOfEngagementComparisonComponent
-
-/*  {
-                "type":"In-House",
-                "jr": 65,
-                "mid": 70,
-                "sr": 75,
-                "tech": 85,
-                "engMan": 110,
-                "qa": 70
-            },
-            {
-                "type":"NearshoreOffSite",
-                "jr": 30,
-                "mid": 38,
-                "sr": 40,
-                "tech": 55,
-                "engMan": 75,
-                "qa": 37
-            },
-            {
-                "type":"OffshoreOffSite",
-                "jr": 25,
-                "mid": 28,
-                "sr": 30,
-                "tech": 40,
-                "engMan": 55,
-                "qa": 26
-            },
-            {
-                "type":"NearshoreOnSite",
-                "jr": 25,
-                "mid": 28,
-                "sr": 30,
-                "tech": 40,
-                "engMan": 55,
-                "qa": 26
-            },
-            {
-                "type":"OffshoreOnSite",
-                "jr": 25,
-                "mid": 28,
-                "sr": 30,
-                "tech": 40,
-                "engMan": 55,
-                "qa": 26
-            }
-        */
+    };*/

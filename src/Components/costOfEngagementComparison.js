@@ -1,8 +1,9 @@
-import React from 'react'
-import { Table, Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Table, Container, Row, Col, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
 import ReactApexChart from 'react-apexcharts'
+import FormEmail from './form-email'
 
-function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pricesInHouse, pricesNearShoreOffSite, pricesNearShoreOnSite, pricesOffShoreOffSite, pricesOffShoreOnSite}) {
+function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pricesInHouse, pricesNearShoreOffSite, pricesNearShoreOnSite, pricesOffShoreOffSite, pricesOffShoreOnSite }) {
     //170 Valor fijo de la formula
     //Project Team Costs In Hose
     //////////////////////////////cambiar 85 por 95 del tech
@@ -160,105 +161,140 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
         }
     }
 
+    function comas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <Container className="mt-4">
             <Row>
                 <Col lg={6}>
                     <ReactApexChart options={options} series={series} type="bar" height={350} />
+                    <center>
+                        <div>
+                            <Button variant="primary" onClick={handleShow}>
+                                Send Prices by Email
+                            </Button>
+                        </div>
+                    </center>
                 </Col>
-            <Col lg={6}  className="p-3">
-                <Table className="resp-table2 center" bordered size="sm">
-                    <thead className="color text-white">
-                        <tr >
-                            <th>Cost Component</th>
-                            <th>In-house US</th>
-                            <th>Nearshore</th>
-                            <th>Offshore</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Man/Hours * On-Site Rate) + Off-Shore Man/Hours * Off-Shore Rate</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Team</a></td>
-                            </OverlayTrigger>   
-                            <td>{PTCInHouse}</td>
-                            <td>{PTCNear}</td>
-                            <td>{PTCOff}</td>
-                        </tr>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * Project Overhead Percentage</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Overhead</a></td>
-                            </OverlayTrigger> 
-                            <td>-</td>
-                            <td>{POCNear}</td>
-                            <td>{POCOff}</td>
-                        </tr>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Attrition Rate (%) * Number of Resources*Time to be productive * Rate</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Vendor's Attrition</a></td>
-                            </OverlayTrigger>
-                            <td>-</td>
-                            <td>{CVANear}</td>
-                            <td>{CVAOff}</td>
-                        </tr>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Resources * Monthly Facility Use Cost per Resource * Number of Months</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>On-site Resources Allocation</a></td>
-                            </OverlayTrigger>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>{ORACOff}</td>
-                        </tr>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Number of LD Minutes/Month * LD Rate * Duration of Engagement in Months</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Long Distance</a></td>
-                            </OverlayTrigger>
-                            <td>-</td>
-                            <td>{LDCNear}</td>
-                            <td>{LDCOff}</td>
-                        </tr>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * KT Overhead Percentage</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Knowledge Transfer</a></td>
-                            </OverlayTrigger>
-                            <td>-</td>
-                            <td>{KTCNear}</td>
-                            <td>{KTCOff}</td>
-                        </tr>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Airfares + Hotel Fares + car rental fees + perdiem</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Trips</a></td>
-                            </OverlayTrigger>
-                            <td>-</td>
-                            <td>{PTCostNear}</td>
-                            <td>{PTCostOff}</td>
-                        </tr>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Off-Shore Man/Hours * Off-Shore Rate * Productivity Loss Percentage</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Productivity Losses</a></td>
-                            </OverlayTrigger>
-                            <td>-</td>
-                            <td>{PLCNear}</td>
-                            <td>{PLCOff}</td>
-                        </tr>
-                        <tr>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Subtotal Engagement Cost * Risk Management Percentage</Tooltip>}>
-                            <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Risk Management</a></td>
-                            </OverlayTrigger>
-                            <td>-</td>
-                            <td>{RMCNear}</td>
-                            <td>{RMCOff}</td>
-                        </tr>
-                        <tr className="table-active">
-                            <td>Total Cost</td>
-                            <td>{PTCInHouse}</td>
-                            <td>{TCENear}</td>
-                            <td>{TCEOff}</td>
-                        </tr>
-                    </tbody>
-                </Table>
+                <Col lg={6} className="p-3">
+                    <Table className="resp-table2 center" bordered size="sm">
+                        <thead className="color text-white">
+                            <tr >
+                                <th>Cost Component</th>
+                                <th>In-house US</th>
+                                <th>Nearshore</th>
+                                <th>Offshore</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Man/Hours * On-Site Rate) + Off-Shore Man/Hours * Off-Shore Rate</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Team</a></td>
+                                </OverlayTrigger>
+                                <td>${comas(PTCInHouse)}</td>
+                                <td>${comas(PTCNear)}</td>
+                                <td>${comas(PTCOff)}</td>
+                            </tr>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * Project Overhead Percentage</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Overhead</a></td>
+                                </OverlayTrigger>
+                                <td>-</td>
+                                <td>${comas(POCNear)}</td>
+                                <td>${comas(POCOff)}</td>
+                            </tr>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Attrition Rate (%) * Number of Resources*Time to be productive * Rate</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Vendor's Attrition</a></td>
+                                </OverlayTrigger>
+                                <td>-</td>
+                                <td>${comas(CVANear)}</td>
+                                <td>${comas(CVAOff)}</td>
+                            </tr>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Resources * Monthly Facility Use Cost per Resource * Number of Months</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>On-site Resources Allocation</a></td>
+                                </OverlayTrigger>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>${comas(ORACOff)}</td>
+                            </tr>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Number of LD Minutes/Month * LD Rate * Duration of Engagement in Months</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Long Distance</a></td>
+                                </OverlayTrigger>
+                                <td>-</td>
+                                <td>${comas(LDCNear)}</td>
+                                <td>{LDCOff}</td>
+                            </tr>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * KT Overhead Percentage</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Knowledge Transfer</a></td>
+                                </OverlayTrigger>
+                                <td>-</td>
+                                <td>${comas(KTCNear)}</td>
+                                <td>${comas(KTCOff)}</td>
+                            </tr>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Airfares + Hotel Fares + car rental fees + perdiem</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Trips</a></td>
+                                </OverlayTrigger>
+                                <td>-</td>
+                                <td>${comas(PTCostNear)}</td>
+                                <td>{PTCostOff}</td>
+                            </tr>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Off-Shore Man/Hours * Off-Shore Rate * Productivity Loss Percentage</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Productivity Losses</a></td>
+                                </OverlayTrigger>
+                                <td>-</td>
+                                <td>${comas(PLCNear)}</td>
+                                <td>${comas(PLCOff)}</td>
+                            </tr>
+                            <tr>
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Subtotal Engagement Cost * Risk Management Percentage</Tooltip>}>
+                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Risk Management</a></td>
+                                </OverlayTrigger>
+                                <td>-</td>
+                                <td>${comas(RMCNear)}</td>
+                                <td>${comas(RMCOff)}</td>
+                            </tr>
+                            <tr className="table-active">
+                                <td>Total Cost</td>
+                                <td>${comas(PTCInHouse)}</td>
+                                <td>${comas(TCENear)}</td>
+                                <td>${comas(TCEOff)}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
                 </Col>
             </Row>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Total Cost of Engagement Calculator</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <FormEmail
+                        PTCInHouse={comas(PTCInHouse)}
+                        TCENear={comas(TCENear)}
+                        TCEOff={comas(TCEOff)}
+                    ></FormEmail>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+          </Button>
+
+                </Modal.Footer>
+            </Modal>
         </Container>
     )
 };
