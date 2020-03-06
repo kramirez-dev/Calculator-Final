@@ -5,14 +5,14 @@ import {
   Route
 } from "react-router-dom";
 import TeamComposition from './Components/teamComposition';
-import projectTeamCost from './APICalls/projectTeamCostCall';
+import NotFound from './Components/notFound';
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route exact path='/' component={TeamComposition}/>
-        <Route exact path={'/prices'} component={projectTeamCost}/>
+        <Route exact path='*' component={NotFound}/>
       </Switch>
     </Router>
   )  

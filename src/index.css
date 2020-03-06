@@ -18,13 +18,24 @@ code {
     .resp-table {
         width: 100%;
     }
+    .tab {
+      margin-bottom: 0;
+      margin: auto;
+      width: 100%;
+      padding: 10px;
+    }
+    .iconsLeft {
+      width: 5%;
+      margin-right: 7px;
+    }
+    
+    .iconsRight {
+      width: 5%;
+      margin-left: 11px;
+    }
   }
 
 @media screen and (max-width: 900px) {
-  .resp-table {
-    width: 700px;
-    font-size: 10px;
-  }
   .resp-table2{
     font-size: 10px;
   }
@@ -36,6 +47,27 @@ code {
   }
   h1{
     font-size: 25px;
+  }
+  .sendEmail {
+    padding:3px 5px;
+    margin: 0;
+    font-size:80%;
+    line-height: 1;
+  }
+  .tab {
+    margin-bottom: 0;
+    width: 100%;
+    padding: 10px;
+    font-size: 7px;
+  }
+  .iconsLeft {
+    width: 5%;
+    margin-right: 7px;
+  }
+  
+  .iconsRight {
+    width: 5%;
+    margin-left: 11px;
   }
 }
 
@@ -60,3 +92,7 @@ h1 {
 .text-blue {
   color: #0087ff;
 }
+
+a:hover {
+  cursor:pointer;
+ }

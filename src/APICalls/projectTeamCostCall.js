@@ -25,6 +25,53 @@ class CostOfEngagementComparisonComponent extends Component {
     }
 
     state = {
+        pricesInHouse: {
+            "type":"In-House",
+            "jr": 65,
+            "mid": 70,
+            "sr": 75,
+            "tech": 85,
+            "engMan": 110,
+            "qa": 70
+        },
+        pricesNearShoreOffSite: {
+            "type":"NearshoreOffSite",
+            "jr": 30,
+            "mid": 38,
+            "sr": 40,
+            "tech": 55,
+            "engMan": 75,
+            "qa": 37
+        },
+        pricesNearShoreOnSite: {
+            "type":"NearshoreOnSite",
+            "jr": 70,
+            "mid": 0,
+            "sr": 85,
+            "tech": 100,
+            "engMan": 125,
+            "qa": 0
+        },
+        pricesOffShoreOffSite: {
+            "type":"",
+            "jr": 25,
+            "mid": 0,
+            "sr": 30,
+            "tech": 40,
+            "engMan": 55,
+            "qa": 26
+        },
+        pricesOffShoreOnSite: {
+            "type":"",
+            "jr": 70,
+            "mid": 0,
+            "sr": 85,
+            "tech": 100,
+            "engMan": 125,
+            "qa": 0
+        }
+    }
+  /*  state = {
         pricesInHouse: [],
         pricesNearShoreOffSite: [],
         pricesNearShoreOnSite: [],
@@ -34,7 +81,7 @@ class CostOfEngagementComparisonComponent extends Component {
     };
     
         componentDidMount() {
-            fetch('http://10.16.0.125:1338/vmt/prices')
+            fetch('http://valuemyteamapidev.scio.local/vmt/prices')
                 .then(res => res.json())
                 .then((data) => {
                     this.setState({ 
@@ -47,7 +94,7 @@ class CostOfEngagementComparisonComponent extends Component {
                     })
                 })
                 .catch(console.log)
-        }
+        }*/
 }
 
 export default CostOfEngagementComparisonComponent
