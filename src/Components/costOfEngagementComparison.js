@@ -155,14 +155,12 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
     const options = {
         chart: {
             type: 'bar',
-            height: 400,
+            height: '100%',
             stacked: true,
             toolbar: {
                 show: true
             },
-            zoom: {
-                enabled: true
-            },
+            defaultLocale: 'en',
             animations: {
                 enabled: true,
                 easing: 'easeinout',
@@ -200,6 +198,12 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
         fill: {
             opacity: 1,
             offsetX: 400
+        },
+        legend: {
+            show:   false,
+        },
+        dataLabels: {
+            enabled: false,
         }
     }
 
@@ -219,18 +223,7 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
         <Container className="mt-4">
             <Row>
                 <Col lg={6}>
-                    <ReactApexChart options={options} series={series} type="bar" height={350} />
-                    <center>
-                        <div>
-                            <Button 
-                            className="sendEmail" 
-                            variant="primary" 
-                            onClick={handleShow} 
-                            disabled={btnDisabled()}>
-                                Send Prices by Email
-                            </Button>
-                        </div>
-                    </center>
+                    <ReactApexChart options={options} series={series} type="bar" height={500} />
                 </Col>
                 <Col lg={6} className="p-3">
                     <Table className="resp-table2 center" bordered size="sm">
@@ -323,6 +316,18 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
                             </tr>
                         </tbody>
                     </Table>
+                    <br></br>
+                    <center>
+                        <div>
+                            <Button 
+                            className="sendEmail" 
+                            variant="primary" 
+                            onClick={handleShow} 
+                            disabled={btnDisabled()}>
+                                Send Prices by Email
+                            </Button>
+                        </div>
+                    </center>
                 </Col>
             </Row>
             <Modal show={show} onHide={handleClose}>
