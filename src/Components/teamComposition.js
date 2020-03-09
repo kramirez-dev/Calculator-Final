@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, Table, Container, Row, Col, Popover, Button, Badge } from 'react-bootstrap';
+import { Table, Container, Row, Col, Badge } from 'react-bootstrap';
 import CostOfEngagementComparisonComponent from '../APICalls/projectTeamCostCall';
 import menos from '../menos.png';
 import mas from '../mas.png';
-
-const popover = (
-    <Popover id="popover-basic">
-        <Popover.Title as="h3">Popover right</Popover.Title>
-        <Popover.Content>
-            And here's some <strong>amazing</strong> content. It's very engaging.
-            right?
-      </Popover.Content>
-    </Popover>
-);
 
 export default function TeamCompositionFun() {
 
@@ -73,8 +63,6 @@ export default function TeamCompositionFun() {
     const [qa, qaCount] = useState(0);
     const [month, monthCount] = useState(0);
 
-    const [show1, setShow1] = useState(true);
-
     return (
         <div>
             <Container className="mt-4">
@@ -92,37 +80,37 @@ export default function TeamCompositionFun() {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td scope="row" className="table-active text-blue">Junior Developer</td>
+                                    <td className="table-active text-blue">Junior Developer</td>
                                     <td> <a onClick={() => limitCountRest("jr")}><img src={menos} className="iconsLeft"></img></a> <label className="card-text text-center">{jr} </label><a onClick={() => limitCountSum("jr")}><img src={mas} className="iconsRight"></img></a> </td>
                                     <td><label className="card-text">{jr} </label></td>
                                     <td><label className="card-text">{jr} </label></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row" className="table-active text-blue">Middle Developer</td>
+                                    <td className="table-active text-blue">Middle Developer</td>
                                     <td> <a onClick={() => limitCountRest("mid")}><img src={menos} className="iconsLeft"></img></a> <label className="card-text text-center">{mid} </label><a onClick={() => limitCountSum("mid")}><img src={mas} className="iconsRight"></img></a> </td>
                                     <td><label className="card-text">{mid} </label></td>
                                     <td><label className="card-text">{mid} </label></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row" className="table-active text-blue">Senior Developer</td>
+                                    <td className="table-active text-blue">Senior Developer</td>
                                     <td> <a onClick={() => limitCountRest("sr")}><img src={menos} className="iconsLeft"></img></a> <label className="card-text text-center">{sr} </label><a onClick={() => limitCountSum("sr")}><img src={mas} className="iconsRight"></img></a> </td>
                                     <td><label className="card-text">{sr} </label></td>
                                     <td><label className="card-text">{sr} </label></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row" className="table-active text-blue">Technical Lead</td>
+                                    <td className="table-active text-blue">Technical Lead</td>
                                     <td> <a onClick={() => limitCountRest("techLead")}><img src={menos} className="iconsLeft"></img></a> <label className="card-text text-center">{techLead} </label><a onClick={() => limitCountSum("techLead")}><img src={mas} className="iconsRight"></img></a> </td>
                                     <td><label className="card-text">{techLead} </label></td>
                                     <td><label className="card-text">{techLead} </label></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row" className="table-active text-blue">QA Engineer</td>
+                                    <td className="table-active text-blue">QA Engineer</td>
                                     <td> <a onClick={() => limitCountRest("qa")}><img src={menos} className="iconsLeft"></img></a> <label className="card-text text-center">{qa} </label><a onClick={() => limitCountSum("qa")}><img src={mas} className="iconsRight"></img></a> </td>
                                     <td><label className="card-text">{qa} </label></td>
                                     <td><label className="card-text">{qa} </label></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row" className="table-active text-blue"><br></br>Engagement Manager</td>
+                                    <td className="table-active text-blue"><br></br>Engagement Manager</td>
                                     <td>
 
                                         <Badge variant="primary">At least one</Badge>
@@ -146,19 +134,21 @@ export default function TeamCompositionFun() {
                                                     <th>On-site</th>
                                                 </tr>
                                             </thead>
-                                            <tr >
-                                                <td>
-                                                    <label className="card-text">{engMan} </label>
-                                                </td>
-                                                <td>
-                                                    <label className="card-text">{engMan} </label>
-                                                </td>
-                                            </tr>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label className="card-text">{engMan} </label>
+                                                    </td>
+                                                    <td>
+                                                        <label className="card-text">{engMan} </label>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td scope="row" className="table-active text-blue">Project Duration (months)</td>
+                                    <td className="table-active text-blue">Project Duration (months)</td>
                                     <td> <a onClick={() => limitCountRest("month")}><img src={menos} className="iconsLeft"></img></a> <label className="card-text text-center">{month} </label><a onClick={() => limitCountSum("month")}><img src={mas} className="iconsRight"></img></a> </td>
                                 </tr>
                             </tbody>

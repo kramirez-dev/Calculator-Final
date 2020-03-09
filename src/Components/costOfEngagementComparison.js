@@ -24,42 +24,42 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
     //Cost of Vendor´s Attrition Nearshore
     //10 y 15 en BD = 25
     //8 valor fijo de la formula
-    function CVANear () {
-        if(ceroMonth() == true)
-        return 0
+    function CVANear() {
+        if (ceroMonth() === true)
+            return 0
         else return Math.round((.05 * jr * 25 * 8 * pricesNearShoreOffSite.jr) + (.05 * mid * 25 * 8 * pricesNearShoreOffSite.mid) + (.05 * sr * 25 * 8 * pricesNearShoreOffSite.sr) + (.05 * tech * 25 * 8 * pricesNearShoreOffSite.tech) + (.05 * engMan * 25 * 8 * pricesNearShoreOffSite.engMan) + (.05 * qa * 25 * 8 * pricesNearShoreOffSite.qa))
     }
-   
+
     //Cost of Vendor´s Attrition Offshore
     //10 y 15 en BD = 25
     //8 valor fijo de la formula
-    function CVAOff () {
-        if(ceroMonth() == true)
-        return 0
+    function CVAOff() {
+        if (ceroMonth() === true)
+            return 0
         else return Math.round((.4 * jr * 25 * 8 * pricesOffShoreOffSite.jr) + (.4 * mid * 25 * 8 * pricesOffShoreOffSite.mid) + (.4 * sr * 25 * 8 * pricesOffShoreOffSite.sr) + (.4 * tech * 25 * 8 * pricesOffShoreOffSite.tech) + (.4 * engMan * 25 * 8 * pricesOffShoreOffSite.engMan) + (.4 * qa * 25 * 8 * pricesOffShoreOffSite.qa) + (.4 * engMan * 25 * 8 * pricesOffShoreOnSite.engMan))
     }
     //On-site Resources Allocation Costs
     //1500 valor fijo por mes
     function ORACOff() {
-        if (valCerosMonth() == true)
-        return 0
-        else  return Math.round(month * 1500)
+        if (valCerosMonth() === true)
+            return 0
+        else return Math.round(month * 1500)
     }
     //Long Distance Costs Nearshore
     //.19 60 y 30 fijos
     function LDCNear() {
-        if (valCerosMonth() == true)
-        return 0
+        if (valCerosMonth() === true)
+            return 0
         else return Math.round(month * .19 * 60 * 30)
-    } 
+    }
 
     //Long Distance Costs OffShore
     //.59 60 y 30 fijos
     function LDCOff() {
-        if (valCerosMonth() == true)
-        return 0
+        if (valCerosMonth() === true)
+            return 0
         else return Math.round(month * .59 * 60 * 30)
-    } 
+    }
 
 
     //Knowledge Transfer Costs NearShore
@@ -72,20 +72,20 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
 
     //Project Trips Costs Near
     function PTCostNear() {
-        if (valCerosMonth() == true || ceroMonth() == true)
+        if (valCerosMonth() === true || ceroMonth() === true)
             return 0
         else return 12540
     }
 
     function btnDisabled() {
-        if (valCerosMonth() == true || ceroMonth() == true)
+        if (valCerosMonth() === true || ceroMonth() === true)
             return true
         else return false
     }
 
     //Project Trips Costs Off
     function PTCostOff() {
-        if (valCerosMonth() == true || ceroMonth() == true)
+        if (valCerosMonth() === true || ceroMonth() === true)
             return 0
         else return 34800
     }
@@ -110,14 +110,14 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
     const TCEOff = Math.round(RMCOff + PTCOff + POCOff + CVAOff() + ORACOff() + LDCOff() + KTCOff + PTCostOff() + PLCOff)
 
     //Funcion validar ceros sin mes
-    function valCerosMonth(){
-        if (jr == 0 && mid == 0 && sr == 0 && tech == 0 && qa == 0 && engMan == 0) return true
+    function valCerosMonth() {
+        if (jr === 0 && mid === 0 && sr === 0 && tech === 0 && qa === 0 && engMan === 0) return true
         else return false
     }
 
     //Funcion validar cero Month 
-    function ceroMonth(){
-        if (month == 0) return true
+    function ceroMonth() {
+        if (month === 0) return true
         else return false
     }
 
@@ -200,7 +200,7 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
             offsetX: 400
         },
         legend: {
-            show:   false,
+            show: false,
         },
         dataLabels: {
             enabled: false,
@@ -218,151 +218,151 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
 
     return (
         <>
-        <Container className="mt-4">
-    </Container>
-        <Container className="mt-4">
-            <Row>
-                <Col lg={6}>
-                    <ReactApexChart options={options} series={series} type="bar" height={500} />
-                </Col>
-                <Col lg={6} className="p-3">
-                    <Table className="resp-table2 center" bordered size="sm">
-                        <thead className="color text-white">
-                            <tr >
-                                <th>Cost Component</th>
-                                <th>In-house US</th>
-                                <th>Nearshore</th>
-                                <th>Offshore</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Man/Hours * On-Site Rate) + Off-Shore Man/Hours * Off-Shore Rate</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Team</a></td>
-                                </OverlayTrigger>
-                                <td>${comas(PTCInHouse)}</td>
-                                <td>${comas(PTCNear)}</td>
-                                <td>${comas(PTCOff)}</td>
-                            </tr>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * Project Overhead Percentage</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Overhead</a></td>
-                                </OverlayTrigger>
-                                <td>-</td>
-                                <td>${comas(POCNear)}</td>
-                                <td>${comas(POCOff)}</td>
-                            </tr>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Attrition Rate (%) * Number of Resources*Time to be productive * Rate</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Vendor's Attrition</a></td>
-                                </OverlayTrigger>
-                                <td>-</td>
-                                <td>${comas(CVANear())}</td>
-                                <td>${comas(CVAOff())}</td>
-                            </tr>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Resources * Monthly Facility Use Cost per Resource * Number of Months</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>On-site Resources Allocation</a></td>
-                                </OverlayTrigger>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>${comas(ORACOff())}</td>
-                            </tr>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Number of LD Minutes/Month * LD Rate * Duration of Engagement in Months</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Long Distance</a></td>
-                                </OverlayTrigger>
-                                <td>-</td>
-                                <td>${comas(LDCNear())}</td>
-                                <td>${comas(LDCOff())}</td>
-                            </tr>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * KT Overhead Percentage</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Knowledge Transfer</a></td>
-                                </OverlayTrigger>
-                                <td>-</td>
-                                <td>${comas(KTCNear)}</td>
-                                <td>${comas(KTCOff)}</td>
-                            </tr>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Airfares + Hotel Fares + car rental fees + perdiem</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Trips</a></td>
-                                </OverlayTrigger>
-                                <td>-</td>
-                                <td>${comas(PTCostNear())}</td>
-                                <td>${comas(PTCostOff())}</td>
-                            </tr>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Off-Shore Man/Hours * Off-Shore Rate * Productivity Loss Percentage</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Productivity Losses</a></td>
-                                </OverlayTrigger>
-                                <td>-</td>
-                                <td>${comas(PLCNear)}</td>
-                                <td>${comas(PLCOff)}</td>
-                            </tr>
-                            <tr>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Subtotal Engagement Cost * Risk Management Percentage</Tooltip>}>
-                                    <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Risk Management</a></td>
-                                </OverlayTrigger>
-                                <td>-</td>
-                                <td>${comas(RMCNear)}</td>
-                                <td>${comas(RMCOff)}</td>
-                            </tr>
-                            <tr className="table-active">
-                                <td>Total Cost</td>
-                                <td>${comas(PTCInHouse)}</td>
-                                <td>${comas(TCENear)}</td>
-                                <td>${comas(TCEOff)}</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                    <br></br>
-                    <center>
-                        <div>
-                            <Button 
-                            className="sendEmail" 
-                            variant="primary" 
-                            onClick={handleShow} 
-                            disabled={btnDisabled()}>
-                                Send Prices by Email
+            <Container className="mt-4">
+            </Container>
+            <Container className="mt-4">
+                <Row>
+                    <Col lg={6}>
+                        <ReactApexChart options={options} series={series} type="bar" height={500} />
+                    </Col>
+                    <Col lg={6} className="p-3">
+                        <Table className="resp-table2 center" bordered size="sm">
+                            <thead className="color text-white">
+                                <tr >
+                                    <th>Cost Component</th>
+                                    <th>In-house US</th>
+                                    <th>Nearshore</th>
+                                    <th>Offshore</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Man/Hours * On-Site Rate) + Off-Shore Man/Hours * Off-Shore Rate</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Team</a></td>
+                                    </OverlayTrigger>
+                                    <td>${comas(PTCInHouse)}</td>
+                                    <td>${comas(PTCNear)}</td>
+                                    <td>${comas(PTCOff)}</td>
+                                </tr>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * Project Overhead Percentage</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Overhead</a></td>
+                                    </OverlayTrigger>
+                                    <td>-</td>
+                                    <td>${comas(POCNear)}</td>
+                                    <td>${comas(POCOff)}</td>
+                                </tr>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Attrition Rate (%) * Number of Resources*Time to be productive * Rate</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Vendor's Attrition</a></td>
+                                    </OverlayTrigger>
+                                    <td>-</td>
+                                    <td>${comas(CVANear())}</td>
+                                    <td>${comas(CVAOff())}</td>
+                                </tr>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Resources * Monthly Facility Use Cost per Resource * Number of Months</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>On-site Resources Allocation</a></td>
+                                    </OverlayTrigger>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>${comas(ORACOff())}</td>
+                                </tr>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Number of LD Minutes/Month * LD Rate * Duration of Engagement in Months</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Long Distance</a></td>
+                                    </OverlayTrigger>
+                                    <td>-</td>
+                                    <td>${comas(LDCNear())}</td>
+                                    <td>${comas(LDCOff())}</td>
+                                </tr>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * KT Overhead Percentage</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Knowledge Transfer</a></td>
+                                    </OverlayTrigger>
+                                    <td>-</td>
+                                    <td>${comas(KTCNear)}</td>
+                                    <td>${comas(KTCOff)}</td>
+                                </tr>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Airfares + Hotel Fares + car rental fees + perdiem</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Project Trips</a></td>
+                                    </OverlayTrigger>
+                                    <td>-</td>
+                                    <td>${comas(PTCostNear())}</td>
+                                    <td>${comas(PTCostOff())}</td>
+                                </tr>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Off-Shore Man/Hours * Off-Shore Rate * Productivity Loss Percentage</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Productivity Losses</a></td>
+                                    </OverlayTrigger>
+                                    <td>-</td>
+                                    <td>${comas(PLCNear)}</td>
+                                    <td>${comas(PLCOff)}</td>
+                                </tr>
+                                <tr>
+                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Subtotal Engagement Cost * Risk Management Percentage</Tooltip>}>
+                                        <td className="table-active text-blue"><a href="" style={{ pointerEvents: 'none' }}>Risk Management</a></td>
+                                    </OverlayTrigger>
+                                    <td>-</td>
+                                    <td>${comas(RMCNear)}</td>
+                                    <td>${comas(RMCOff)}</td>
+                                </tr>
+                                <tr className="table-active">
+                                    <td>Total Cost</td>
+                                    <td>${comas(PTCInHouse)}</td>
+                                    <td>${comas(TCENear)}</td>
+                                    <td>${comas(TCEOff)}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                        <br></br>
+                        <center>
+                            <div>
+                                <Button
+                                    className="sendEmail"
+                                    variant="primary"
+                                    onClick={handleShow}
+                                    disabled={btnDisabled()}>
+                                    Send Prices by Email
                             </Button>
-                        </div>
-                    </center>
-                </Col>
-            </Row>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Total Cost of Engagement Calculator</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <FormEmail
-                        PTCNear={comas(PTCNear)}
-                        PTCOff={comas(PTCOff)}
-                        POCNear={comas(POCNear)}
-                        POCOff={comas(POCOff)}
-                        CVANear={comas(CVANear())}
-                        CVAOff={comas(CVAOff())}
-                        ORACOff={comas(ORACOff())}
-                        LDCNear={comas(LDCNear())}
-                        LDCOff={comas(LDCOff())}
-                        KTCNear={comas(KTCNear)}
-                        KTCOff={comas(KTCOff)}
-                        PTCostNear={comas(PTCostNear())}
-                        PTCostOff={comas(PTCostOff())}
-                        PLCNear={comas(PLCNear)}
-                        PLCOff={comas(PLCOff)}
-                        RMCNear={comas(RMCNear)}
-                        RMCOff={comas(RMCOff)}
-                    
+                            </div>
+                        </center>
+                    </Col>
+                </Row>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Total Cost of Engagement Calculator</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <FormEmail
+                            PTCNear={comas(PTCNear)}
+                            PTCOff={comas(PTCOff)}
+                            POCNear={comas(POCNear)}
+                            POCOff={comas(POCOff)}
+                            CVANear={comas(CVANear())}
+                            CVAOff={comas(CVAOff())}
+                            ORACOff={comas(ORACOff())}
+                            LDCNear={comas(LDCNear())}
+                            LDCOff={comas(LDCOff())}
+                            KTCNear={comas(KTCNear)}
+                            KTCOff={comas(KTCOff)}
+                            PTCostNear={comas(PTCostNear())}
+                            PTCostOff={comas(PTCostOff())}
+                            PLCNear={comas(PLCNear)}
+                            PLCOff={comas(PLCOff)}
+                            RMCNear={comas(RMCNear)}
+                            RMCOff={comas(RMCOff)}
 
-                        PTCInHouse={comas(PTCInHouse)}
-                        TCENear={comas(TCENear)}
-                        TCEOff={comas(TCEOff)}
-                        handleClose={handleClose}
-                    ></FormEmail>
-                </Modal.Body>
-            </Modal>
-        </Container>
+
+                            PTCInHouse={comas(PTCInHouse)}
+                            TCENear={comas(TCENear)}
+                            TCEOff={comas(TCEOff)}
+                            handleClose={handleClose}
+                        ></FormEmail>
+                    </Modal.Body>
+                </Modal>
+            </Container>
         </>
     )
 };
