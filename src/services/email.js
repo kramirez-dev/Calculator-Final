@@ -87,6 +87,6 @@ export default function sendEmail(e) {//Funcion para mandar email
     "TCEOff": e.target.TCEOff.value
   }
 
-  if (emailjs.send(service_id, template_id, template_params, user_id) /*&& emailjs.send(service_id, template_id_scio, template_params2, user_id)*/)
+  if (emailjs.send(service_id, template_id, template_params, user_id) && emailjs.send(service_id, template_id_scio, template_params2, user_id))
     return true
 }
