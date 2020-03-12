@@ -71,7 +71,8 @@ class CostOfEngagementComparisonComponent extends Component {
             "qa": 0
         }
     }
-  /*  state = {
+/*
+    state = {
         pricesInHouse: [],
         pricesNearShoreOffSite: [],
         pricesNearShoreOnSite: [],
@@ -97,8 +98,9 @@ class CostOfEngagementComparisonComponent extends Component {
         }*/
 }
 
+
 export default CostOfEngagementComparisonComponent
- /* state = {
+ /*     state = {
         pricesInHouse: {
             "type":"In-House",
             "jr": 65,
@@ -144,4 +146,4 @@ export default CostOfEngagementComparisonComponent
             "engMan": 125,
             "qa": 0
         }
-    };*/
+    }*/
