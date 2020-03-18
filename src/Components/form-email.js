@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { Container } from 'react-bootstrap';
+import { Container, Accordion, Card, Table } from 'react-bootstrap';
 
 export default function FormEmail({ PTCNear,
   jr,
@@ -14,7 +14,6 @@ export default function FormEmail({ PTCNear,
   sr,
   tech,
   qa,
-  engMan,
   month,
 
   PTCOff,
@@ -23,6 +22,7 @@ export default function FormEmail({ PTCNear,
   CVANear,
   CVAOff,
   ORACOff,
+  ORACNear,
   //LDCNear,
   //LDCOff,
   KTCNear,
@@ -44,7 +44,7 @@ export default function FormEmail({ PTCNear,
     setLoading(true)
     if (sendEmail(e) === true) {
       setLoading(false)
-      swal("Email Sent!", "", "success").then(() => {
+      swal("Email Sent!", "Check your", "success").then(() => {
         handleClose()
       });
     } else {
@@ -63,11 +63,68 @@ export default function FormEmail({ PTCNear,
         <Row>
           <Col>
             <div style={{ textAlign: "center" }}>
-              <h2 className="total-price">In-House total cost: <h2 style={{ color: '#0087ff' }}>${PTCInHouse}</h2></h2>
-              <h2 className="total-price">Nearshore total cost: <h2 style={{ color: '#0087ff' }}>${TCENear}</h2></h2>
-              <h2 className="total-price">Offshore total cost: <h2 style={{ color: '#0087ff' }}>${TCEOff}</h2></h2>
+              <h3 className="total-price">In-House total cost: <h3 style={{ color: '#0087ff' }}>${PTCInHouse}</h3></h3>
+              <h3 className="total-price">Nearshore total cost: <h3 style={{ color: '#0087ff' }}>${TCENear}</h3></h3>
+              <h3 className="total-price">Offshore total cost: <h3 style={{ color: '#0087ff' }}>${TCEOff}</h3></h3>
             </div>
-            <p className="body-text">Please complete this form below to send you an email with the Total Cost of Engagement.</p>
+            <div style={{ textAlign: "center"}}>
+              <Accordion>
+                <Accordion.Toggle as={Button} size="sm" variant="primary" eventKey="0" >
+                  Team Composition
+                   </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <Row >
+                    <Col md={2}></Col>
+                        <Col md={8}>
+                            <Table className="resp-table2 center" bordered size="sm">
+                                <thead className="tex-white">
+                                    <tr className="color">
+                                        <th>Developers/Engineers</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                     <td>Lead Developer</td>  
+                                        <td>
+                                            {tech}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Senior Developer</td>
+                                        <td>
+                                            {sr}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mid-Level Developer</td>
+                                        <td>
+                                            {mid}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Junior Developer</td>
+                                        <td>
+                                            {jr}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>QA Engineer</td>
+                                        <td>
+                                            {qa}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Col>
+                        <Col md={2}></Col>
+                    </Row>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Accordion>
+            </div>
+            <p className="body-text">Please complete this form below to send you an email with the Total Cost of Engagement and the Team Composition</p>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Control type="email" placeholder="Email Address" name="user_email" required />
@@ -117,7 +174,11 @@ export default function FormEmail({ PTCNear,
               <Form.Group controlId="formBasicTotal" hidden={true}>
                 <Form.Control type="text" name="ORACOff" value={ORACOff} />
               </Form.Group>
-{/*
+
+              <Form.Group controlId="formBasicTotal" hidden={true}>
+                <Form.Control type="text" name="ORACNear" value={ORACNear} />
+              </Form.Group>
+              {/*
               <Form.Group controlId="formBasicTotal" hidden={true}>
                 <Form.Control type="text" name="LDCNear" value={LDCNear} />
               </Form.Group>
@@ -171,7 +232,7 @@ export default function FormEmail({ PTCNear,
               <Form.Group controlId="formBasicTotal" hidden={true}>
                 <Form.Control type="text" name="sr" value={sr} />
               </Form.Group>
-              
+
               <Form.Group controlId="formBasicTotal" hidden={true}>
                 <Form.Control type="text" name="tech" value={tech} />
               </Form.Group>
@@ -181,15 +242,11 @@ export default function FormEmail({ PTCNear,
               </Form.Group>
 
               <Form.Group controlId="formBasicTotal" hidden={true}>
-                <Form.Control type="text" name="engMan" value={engMan} />
-              </Form.Group>
-
-              <Form.Group controlId="formBasicTotal" hidden={true}>
                 <Form.Control type="text" name="month" value={month} />
               </Form.Group>
               <Row>
                 <Col style={{ textAlign: "center" }}>
-                  <Button variant="primary" type="submit" value="Send"
+                  <Button variant="primary" size="md" type="submit" value="Send"
                     disabled={isLoading}
                     onSubmit={handleClose}
                   >

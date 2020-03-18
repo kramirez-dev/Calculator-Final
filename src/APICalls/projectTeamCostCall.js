@@ -10,7 +10,6 @@ class CostOfEngagementComparisonComponent extends Component {
                 mid={this.props.mid}
                 sr={this.props.sr}
                 tech={this.props.tech}
-                engMan={this.props.engMan}
                 qa={this.props.qa}
                 month={this.props.month}
 
@@ -30,7 +29,7 @@ class CostOfEngagementComparisonComponent extends Component {
             "jr": 65,
             "mid": 70,
             "sr": 75,
-            "tech": 85,
+            "tech": 95,
             "engMan": 110,
             "qa": 70
         },
@@ -38,37 +37,37 @@ class CostOfEngagementComparisonComponent extends Component {
             "type":"NearshoreOffSite",
             "jr": 30,
             "mid": 38,
-            "sr": 40,
+            "sr": 46,
             "tech": 55,
             "engMan": 75,
-            "qa": 37
+            "qa": 34
         },
         pricesNearShoreOnSite: {
             "type":"NearshoreOnSite",
             "jr": 70,
-            "mid": 0,
+            "mid": 75,
             "sr": 85,
             "tech": 100,
             "engMan": 125,
-            "qa": 0
+            "qa": 70
         },
         pricesOffShoreOffSite: {
-            "type":"",
+            "type":"OffShoreOffSite",
             "jr": 25,
-            "mid": 0,
+            "mid": 28,
             "sr": 30,
             "tech": 40,
             "engMan": 55,
             "qa": 26
         },
         pricesOffShoreOnSite: {
-            "type":"",
+            "type":"OffShoreOnSite",
             "jr": 70,
-            "mid": 0,
+            "mid": 75,
             "sr": 85,
             "tech": 100,
             "engMan": 125,
-            "qa": 0
+            "qa": 70
         }
     }
 /*

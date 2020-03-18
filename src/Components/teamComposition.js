@@ -4,56 +4,21 @@ import CostOfEngagementComparisonComponent from '../APICalls/projectTeamCostCall
 import menos from '../menos.png';
 import mas from '../mas.png';
 
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import Slider from '@material-ui/core/Slider';
+
+const useStyles = makeStyles(theme => ({
+  slider: {
+    color: "#0087ff",
+  },
+  root: {
+    color: "#0087ff",
+    width: '100%',
+    fontSize: '15px',
+  },
+}));
+
 export default function TeamCompositionFun() {
-
-    function limitCountRest(val) {
-
-        if (jr > 0 && val === "jr") {
-            jrCount(jr - 1)
-        }
-        if (mid > 0 && val === "mid") {
-            midCount(mid - 1)
-        }
-        if (sr > 0 && val === "sr") {
-            srCount(sr - 1)
-        }
-        if (techLead > 0 && val === "techLead") {
-            techLeadCount(techLead - 1)
-        }
-        if (qa > 0 && val === "qa") {
-            qaCount(qa - 1)
-        }
-        if (engMan > 0 && val === "engMan") {
-            engManCount(engMan - 1)
-        }
-        if (month > 0 && val === "month") {
-            monthCount(month - 1)
-        }
-    }
-
-    function limitCountSum(val) {
-        if (jr < 5 && val === "jr") {
-            jrCount(jr + 1)
-        }
-        if (mid < 5 && val === "mid") {
-            midCount(mid + 1)
-        }
-        if (sr < 3 && val === "sr") {
-            srCount(sr + 1)
-        }
-        if (techLead < 1 && val === "techLead") {
-            techLeadCount(techLead + 1)
-        }
-        if (qa < 3 && val === "qa") {
-            qaCount(qa + 1)
-        }
-        if (engMan < 1 && val === "engMan") {
-            engManCount(engMan + 1)
-        }
-        if (month < 12 && val === "month") {
-            monthCount(month + 1)
-        }
-    }
 
     const [jr, jrCount] = useState(0);
     const [mid, midCount] = useState(0);
@@ -62,12 +27,161 @@ export default function TeamCompositionFun() {
     const [engMan, engManCount] = useState(0);
     const [qa, qaCount] = useState(0);
     const [month, monthCount] = useState(0);
+    const classes = useStyles()
+
+    const marks = [
+        { value: 0, label: '0' },
+        { value: 1, label: '1' },
+        { value: 2, label: '2' },
+        { value: 3, label: '3' },
+        { value: 4, label: '4' },
+        { value: 5, label: '5' },
+        { value: 6, label: '6' },
+        { value: 7, label: '7' },
+        { value: 8, label: '8' },
+        { value: 9, label: '9' },
+        { value: 10, label: '10' },
+    ]
+
+    const marks12 = [
+        { value: 0, label: '0' },
+        { value: 1, label: '1' },
+        { value: 2, label: '2' },
+        { value: 3, label: '3' },
+        { value: 4, label: '4' },
+        { value: 5, label: '5' },
+        { value: 6, label: '6' },
+        { value: 7, label: '7' },
+        { value: 8, label: '8' },
+        { value: 9, label: '9' },
+        { value: 10, label: '10' },
+        { value: 11, label: '11' },
+        { value: 12, label: '12' },
+    ]
+
+    function jrHandler(event, value){
+        jrCount(value)
+    }
+
+    function monthHandler(event, value){
+        monthCount(value)
+    }
+    
+    function midHandler(event, value){
+        midCount(value)
+    }
+
+    function techHandler(event, value){
+        techLeadCount(value)
+    }
+
+    function srHandler(event, value){
+        srCount(value)
+    }
+
+    function qaHandler(event, value){
+        qaCount(value)
+    }
+
 
     return (
         <div>
-            <Container className="mt-4">
+            <Container className="mt-4" fluid={true}>
                 <h1 className="center text-blue">Total Cost of Engagement Calculator</h1>
-                <Row className="mt-4">
+                <div className={classes.root}>
+                <Row className="p-3">
+                    <Col md={12} lg={3}>
+                    <Row >
+                    <label>Project Duration (Months): </label>
+                    <Slider
+                         aria-labelledby="discrete-slider"
+                         valueLabelDisplay="auto"
+                        defaultValue={0}
+                        step={1}
+                        marks={marks12}
+                        className={classes.slider}
+                        max={12}
+                        onChangeCommitted={monthHandler}
+                    />
+                    <label>Lead Developer</label>
+                    <Slider
+                         aria-labelledby="discrete-slider"
+                         valueLabelDisplay="auto"
+                        defaultValue={0}
+                        step={1}
+                        marks={marks}
+                        className={classes.slider}
+                        max={10}
+                        onChangeCommitted={techHandler}
+                    />
+                    <label>Senior Developer</label>
+                    <Slider
+                         aria-labelledby="discrete-slider"
+                         valueLabelDisplay="auto"
+                        defaultValue={0}
+                        step={1}
+                        marks={marks}
+                        className={classes.slider}
+                        max={10}
+                        onChangeCommitted={srHandler}
+                    />
+                    <label>Mid-Level Developer</label>
+                    <Slider
+                         aria-labelledby="discrete-slider"
+                         valueLabelDisplay="auto"
+                        defaultValue={0}
+                        step={1}
+                        marks={marks}
+                        className={classes.slider}
+                        max={10}
+                        onChangeCommitted={midHandler}
+                    />
+                    <label>Jr Developer</label>
+                    <Slider
+                         aria-labelledby="discrete-slider"
+                         valueLabelDisplay="auto"
+                        defaultValue={0}
+                        step={1}
+                        marks={marks}
+                        className={classes.slider}
+                        max={10}
+                        onChangeCommitted={jrHandler}
+                    />
+                    <label>QA Engineer</label>
+                    <Slider
+                         aria-labelledby="discrete-slider"
+                         valueLabelDisplay="auto"
+                        defaultValue={0}
+                        step={1}
+                        marks={marks}
+                        className={classes.slider}
+                        max={10}
+                        onChangeCommitted={qaHandler}
+                    />
+                    </Row>
+                    </Col>
+                    <Col md={9}>
+                    <CostOfEngagementComparisonComponent
+                        jr={jr}
+                        mid={mid}
+                        sr={sr}
+                        tech={techLead}
+                        qa={qa}
+                        engMan={engMan}
+                        month={month}
+                    />
+                    </Col>
+                </Row>
+                    </div>
+            </Container>
+        </div>
+        
+    );
+}
+
+/*
+
+<Row className="mt-4">
                     <Col>
                         <Table className="resp-table2 center" bordered size="sm">
                             <thead className="tex-white">
@@ -155,16 +269,5 @@ export default function TeamCompositionFun() {
                         </Table>
                     </Col>
                 </Row>
-            </Container>
-            <CostOfEngagementComparisonComponent
-                jr={jr}
-                mid={mid}
-                sr={sr}
-                tech={techLead}
-                qa={qa}
-                engMan={engMan}
-                month={month}
-            />
-        </div>
-    );
-}
+
+* */

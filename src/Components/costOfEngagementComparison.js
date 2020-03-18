@@ -3,37 +3,36 @@ import { Table, Container, Row, Col, OverlayTrigger, Tooltip, Modal, Button } fr
 import ReactApexChart from 'react-apexcharts'
 import FormEmail from './form-email'
 
-function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pricesInHouse, pricesNearShoreOffSite, pricesNearShoreOnSite, pricesOffShoreOffSite, pricesOffShoreOnSite }) {
-    
-    //Valores necesarios en caso de que los limites de los devs Suban
-    const jrNearOn = Math.round(jr/25)
-    const midNearOn = Math.round(mid/25) //25? Podria cambiar
-    const srNearOn = Math.round(sr/10)
-    const techNearOn = Math.round(tech/5)
-    const qaNearOn = Math.round(qa/25) //25? Podria cambiar
-    const engManNearOn = Math.round(engMan/3)
+
+function CostOfEngagementComparison({ jr, mid, sr, tech, qa, month, pricesInHouse, pricesNearShoreOffSite, pricesNearShoreOnSite, pricesOffShoreOffSite, pricesOffShoreOnSite }) {
 
     //Valores necesarios en caso de que los limites de los devs Suban
-    const jrOffOn = Math.round(jr/25)
-    const midOffOn = Math.round(mid/25) //25? Podria cambiar
-    const srOffOn = Math.round(sr/10)
-    const techOffOn = Math.round(tech/5)
-    const qaOffOn = Math.round(qa/25) //25? Podria cambiar
-    const engManOffOn = Math.round(engMan/2)
+    const jrNearOn = Math.round(jr / 25)
+    const midNearOn = Math.round(mid / 25) //25? Podria cambiar
+    const srNearOn = Math.round(sr / 10)
+    const techNearOn = Math.round(tech / 5)
+    const qaNearOn = Math.round(qa / 25) //25? Podria cambiar
+
+    //Valores necesarios en caso de que los limites de los devs Suban
+    const jrOffOn = Math.round(jr / 25)
+    const midOffOn = Math.round(mid / 25) //25? Podria cambiar
+    const srOffOn = Math.round(sr / 10)
+    const techOffOn = Math.round(tech / 5)
+    const qaOffOn = Math.round(qa / 25) //25? Podria cambiar
 
     //170 Valor fijo de la formula
     //Project Team Costs In Hose
     //////////////////////////////cambiar 85 por 95 del tech
-    const PTCInHouse = Math.round((jr * pricesInHouse.jr * 170 * month) + (mid * pricesInHouse.mid * 170 * month) + (sr * pricesInHouse.sr * 170 * month) + (tech * pricesInHouse.tech * 170 * month) + (engMan * pricesInHouse.engMan * 170 * month) + (qa * pricesInHouse.qa * 170 * month))
+    const PTCInHouse = Math.round((jr * pricesInHouse.jr * 170 * month) + (mid * pricesInHouse.mid * 170 * month) + (sr * pricesInHouse.sr * 170 * month) + (tech * pricesInHouse.tech * 170 * month) + (qa * pricesInHouse.qa * 170 * month))
 
     //Project Team Costs NearShore
     //////////////////////////////Cambiar valores de 40 a 46 
-    const PTCNear = Math.round((jrNearOn * pricesNearShoreOnSite.jr * 170 * month) + (midNearOn * pricesNearShoreOnSite.mid * 170 * month) + (srNearOn * pricesNearShoreOnSite.sr * 170 * month) + (techNearOn * pricesNearShoreOnSite.tech * 170 * month) + (engManNearOn * pricesNearShoreOnSite.engMan * 170 * month) + (qaNearOn * pricesNearShoreOnSite.qa * 170 * month) + 
-    (jr * pricesNearShoreOffSite.jr * 170 * month) + (mid * pricesNearShoreOffSite.mid * 170 * month) + (sr * pricesNearShoreOffSite.sr * 170 * month) + (tech * pricesNearShoreOffSite.tech * 170 * month) + (engMan * pricesNearShoreOffSite.engMan * 170 * month) + (qa * pricesNearShoreOffSite.qa * 170 * month))
+    const PTCNear = Math.round((jrNearOn * pricesNearShoreOnSite.jr * 170 * month) + (midNearOn * pricesNearShoreOnSite.mid * 170 * month) + (srNearOn * pricesNearShoreOnSite.sr * 170 * month) + (techNearOn * pricesNearShoreOnSite.tech * 170 * month) + (qaNearOn * pricesNearShoreOnSite.qa * 170 * month) +
+        (jr * pricesNearShoreOffSite.jr * 170 * month) + (mid * pricesNearShoreOffSite.mid * 170 * month) + (sr * pricesNearShoreOffSite.sr * 170 * month) + (tech * pricesNearShoreOffSite.tech * 170 * month) + (qa * pricesNearShoreOffSite.qa * 170 * month))
 
     //Project Team Costs OffShore
-    const PTCOff = Math.round((jr * pricesOffShoreOffSite.jr * 170 * month) + (mid * pricesOffShoreOffSite.mid * 170 * month) + (sr * pricesOffShoreOffSite.sr * 170 * month) + (tech * pricesOffShoreOffSite.tech * 170 * month) + (engMan * pricesOffShoreOffSite.engMan * 170 * month) + (qa * pricesOffShoreOffSite.qa * 170 * month) + 
-    (jrOffOn * pricesOffShoreOnSite.jr * 170 * month) + (midOffOn * pricesOffShoreOnSite.mid * 170 * month) + (srOffOn * pricesOffShoreOnSite.sr * 170 * month) + (techOffOn * pricesOffShoreOnSite.tech * 170 * month) + (engManOffOn * pricesOffShoreOnSite.engMan * 170 * month) + (qa * pricesOffShoreOffSite.qa * 170 * month))
+    const PTCOff = Math.round((jr * pricesOffShoreOffSite.jr * 170 * month) + (mid * pricesOffShoreOffSite.mid * 170 * month) + (sr * pricesOffShoreOffSite.sr * 170 * month) + (tech * pricesOffShoreOffSite.tech * 170 * month) + (qa * pricesOffShoreOffSite.qa * 170 * month) +
+        (jrOffOn * pricesOffShoreOnSite.jr * 170 * month) + (midOffOn * pricesOffShoreOnSite.mid * 170 * month) + (srOffOn * pricesOffShoreOnSite.sr * 170 * month) + (techOffOn * pricesOffShoreOnSite.tech * 170 * month) + (qa * pricesOffShoreOffSite.qa * 170 * month))
 
     //Project Overhead Cost
     //.10 y .20 Posibles a estar en BD
@@ -46,8 +45,8 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
     function CVANear() {
         if (ceroMonth() === true)
             return 0
-        else return Math.round((.05 * jr * 25 * 8 * pricesNearShoreOffSite.jr) + (.05 * mid * 25 * 8 * pricesNearShoreOffSite.mid) + (.05 * sr * 25 * 8 * pricesNearShoreOffSite.sr) + (.05 * tech * 25 * 8 * pricesNearShoreOffSite.tech) + (.05 * engMan * 25 * 8 * pricesNearShoreOffSite.engMan) + (.05 * qa * 25 * 8 * pricesNearShoreOffSite.qa) + 
-        (.05 * jrNearOn * 25 * 8 * pricesNearShoreOnSite.jr) + (.05 * midNearOn * 25 * 8 * pricesNearShoreOnSite.mid) + (.05 * srNearOn * 25 * 8 * pricesNearShoreOnSite.sr) + (.05 * techNearOn * 25 * 8 * pricesNearShoreOnSite.tech) + (.05 * engManNearOn * 25 * 8 * pricesNearShoreOnSite.engMan) + (.05 * qaNearOn * 25 * 8 * pricesNearShoreOnSite.qa))
+        else return Math.round((.05 * jr * 25 * 8 * pricesNearShoreOffSite.jr) + (.05 * mid * 25 * 8 * pricesNearShoreOffSite.mid) + (.05 * sr * 25 * 8 * pricesNearShoreOffSite.sr) + (.05 * tech * 25 * 8 * pricesNearShoreOffSite.tech) + (.05 * qa * 25 * 8 * pricesNearShoreOffSite.qa) +
+            (.05 * jrNearOn * 25 * 8 * pricesNearShoreOnSite.jr) + (.05 * midNearOn * 25 * 8 * pricesNearShoreOnSite.mid) + (.05 * srNearOn * 25 * 8 * pricesNearShoreOnSite.sr) + (.05 * techNearOn * 25 * 8 * pricesNearShoreOnSite.tech) + (.05 * qaNearOn * 25 * 8 * pricesNearShoreOnSite.qa))
     }
 
     //Cost of Vendor´s Attrition Offshore
@@ -56,15 +55,15 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
     function CVAOff() {
         if (ceroMonth() === true)
             return 0
-        else return Math.round((.4 * jr * 25 * 8 * pricesOffShoreOffSite.jr) + (.4 * mid * 25 * 8 * pricesOffShoreOffSite.mid) + (.4 * sr * 25 * 8 * pricesOffShoreOffSite.sr) + (.4 * tech * 25 * 8 * pricesOffShoreOffSite.tech) + (.4 * engMan * 25 * 8 * pricesOffShoreOffSite.engMan) + (.4 * qa * 25 * 8 * pricesOffShoreOffSite.qa) + 
-        (.4 * jrOffOn * 25 * 8 * pricesOffShoreOnSite.jr) + (.4 * midOffOn * 25 * 8 * pricesOffShoreOnSite.mid) + (.4 * srOffOn * 25 * 8 * pricesOffShoreOnSite.sr) + (.4 * techOffOn * 25 * 8 * pricesOffShoreOnSite.tech) + (.4 * engManOffOn * 25 * 8 * pricesOffShoreOnSite.engMan) + (.4 * qaOffOn * 25 * 8 * pricesOffShoreOnSite.qa) )
+        else return Math.round((.4 * jr * 25 * 8 * pricesOffShoreOffSite.jr) + (.4 * mid * 25 * 8 * pricesOffShoreOffSite.mid) + (.4 * sr * 25 * 8 * pricesOffShoreOffSite.sr) + (.4 * tech * 25 * 8 * pricesOffShoreOffSite.tech) + (.4 * qa * 25 * 8 * pricesOffShoreOffSite.qa) +
+            (.4 * jrOffOn * 25 * 8 * pricesOffShoreOnSite.jr) + (.4 * midOffOn * 25 * 8 * pricesOffShoreOnSite.mid) + (.4 * srOffOn * 25 * 8 * pricesOffShoreOnSite.sr) + (.4 * techOffOn * 25 * 8 * pricesOffShoreOnSite.tech) + (.4 * qaOffOn * 25 * 8 * pricesOffShoreOnSite.qa))
     }
     //OffShore Resources Allocation Costs
     //1500 valor fijo por mes
     function ORACOff() {
         if (valCerosMonth() === true)
             return 0
-        else return Math.round(month * (jrOffOn + midOffOn + srOffOn + techOffOn + qaOffOn + engManOffOn) * 1500)
+        else return Math.round(month * (jrOffOn + midOffOn + srOffOn + techOffOn + qaOffOn) * 1500)
     }
 
     //NearShore Resources Allocation Costs
@@ -72,25 +71,25 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
     function ORACNear() {
         if (valCerosMonth() === true)
             return 0
-        else return Math.round(month * (jrNearOn + midNearOn + srNearOn + techNearOn + qaNearOn + engManNearOn) * 1500)
+        else return Math.round(month * (jrNearOn + midNearOn + srNearOn + techNearOn + qaNearOn) * 1500)
     }
-/*
-    //Long Distance Costs Nearshore
-    //.19 60 y 30 fijos
-    function LDCNear() {
-        if (valCerosMonth() === true)
-            return 0
-        else return Math.round(month * .19 * 60 * 30)
-    }
-
-    //Long Distance Costs OffShore
-    //.59 60 y 30 fijos
-    function LDCOff() {
-        if (valCerosMonth() === true)
-            return 0
-        else return Math.round(month * .59 * 60 * 30)
-    }
-*/
+    /*
+        //Long Distance Costs Nearshore
+        //.19 60 y 30 fijos
+        function LDCNear() {
+            if (valCerosMonth() === true)
+                return 0
+            else return Math.round(month * .19 * 60 * 30)
+        }
+    
+        //Long Distance Costs OffShore
+        //.59 60 y 30 fijos
+        function LDCOff() {
+            if (valCerosMonth() === true)
+                return 0
+            else return Math.round(month * .59 * 60 * 30)
+        }
+    */
 
     //Knowledge Transfer Costs NearShore
     //.05 fijo
@@ -115,11 +114,11 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
     }
 
     //Productivity Losses Costs Near
-    const aux1 =  (jr * pricesNearShoreOffSite.jr * 170 * month) + (mid * pricesNearShoreOffSite.mid * 170 * month) + (sr * pricesNearShoreOffSite.sr * 170 * month) + (tech * pricesNearShoreOffSite.tech * 170 * month) + (engMan * pricesNearShoreOffSite.engMan * 170 * month) + (qa * pricesNearShoreOffSite.qa * 170 * month)
+    const aux1 = (jr * pricesNearShoreOffSite.jr * 170 * month) + (mid * pricesNearShoreOffSite.mid * 170 * month) + (sr * pricesNearShoreOffSite.sr * 170 * month) + (tech * pricesNearShoreOffSite.tech * 170 * month) + (qa * pricesNearShoreOffSite.qa * 170 * month)
     const PLCNear = Math.round(aux1 * .1)
 
     //Productivity Losses Costs Off
-    const aux2 = (jr * pricesOffShoreOffSite.jr * 170 * month) + (mid * pricesOffShoreOffSite.mid * 170 * month) + (sr * pricesOffShoreOffSite.sr * 170 * month) + (tech * pricesOffShoreOffSite.tech * 170 * month) + (engMan * pricesOffShoreOffSite.engMan * 170 * month) + (qa * pricesOffShoreOffSite.qa * 170 * month)
+    const aux2 = (jr * pricesOffShoreOffSite.jr * 170 * month) + (mid * pricesOffShoreOffSite.mid * 170 * month) + (sr * pricesOffShoreOffSite.sr * 170 * month) + (tech * pricesOffShoreOffSite.tech * 170 * month) + (qa * pricesOffShoreOffSite.qa * 170 * month)
     const PLCOff = Math.round(aux2 * .25)
 
 
@@ -134,11 +133,11 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
     const TCENear = Math.round(RMCNear + PTCNear + POCNear + CVANear() + /*LDCNear()*/ + KTCNear + PTCostNear() + PLCNear)
 
     ////Total cost of Engagement Off
-    const TCEOff = Math.round(RMCOff + PTCOff + POCOff + CVAOff() + ORACOff() + /*LDCOff()*/  + KTCOff + PTCostOff() + PLCOff)
+    const TCEOff = Math.round(RMCOff + PTCOff + POCOff + CVAOff() + ORACOff() + /*LDCOff()*/ + KTCOff + PTCostOff() + PLCOff)
 
     //Funcion validar ceros sin mes
     function valCerosMonth() {
-        if (jr === 0 && mid === 0 && sr === 0 && tech === 0 && qa === 0 && engMan === 0) return true
+        if (jr === 0 && mid === 0 && sr === 0 && tech === 0 && qa === 0) return true
         else return false
     }
 
@@ -147,11 +146,19 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
         if (month === 0) return true
         else return false
     }
+    
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
 
     function btnDisabled() {
         if (valCerosMonth() === true || ceroMonth() === true)
             return true
-        else return false
+        else{
+                return false
+        }
     }
 
     //Total cost of Engagemet Graph Data
@@ -184,7 +191,7 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
         data: [0, RMCNear, RMCOff]
     }]
 
-    
+
     //Total cost of Engagemet Graph Props
     const options = {
         chart: {
@@ -196,10 +203,10 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
                 offsetX: 0,
                 offsetY: 0,
                 tools: {
-                  download: true,
-                  pan: true
+                    download: true,
+                    pan: true
                 },
-              },
+            },
             defaultLocale: 'en',
             animations: {
                 enabled: true,
@@ -242,89 +249,80 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
         },
         yaxis: {
             axisBorder: {
-              show: true
+                show: false
             },
             labels: {
-              show: !btnDisabled(),
-              formatter: function (val) {
-                return "$" + comas(val);
-              }
+                show: !btnDisabled(),
+                formatter: function (val) {
+                    return "$" + comas(val);
+                }
             }
-          
-          },
-          xaxis: {
+
+        },
+        xaxis: {
             type: 'category',
-            categories: ['In-house ' + '\n'+ "($" + comas(PTCInHouse) + ")", 'Nearshore ' + "($" + comas(TCENear) + ")", 'Offshore ' + "($" + comas(TCEOff) + ")"
-            ],
+            categories: [['In-house',"$" + comas(PTCInHouse)], ['Nearshore', "$" + comas(TCENear)], ['Offshore',  "$" + comas(TCEOff)]],
             axisBorder: {
-              show: false
+                show: false
             },
             labels: {
-              show: true,
+                show: !btnDisabled()
             }
-          
-          }
+        }
     }
 
     function comas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     return (
-        <>
-            <Container className="mt-4">
-            </Container>
-            <Container className="mt-4">
+        <div>
+            <Container>
                 <Row>
-                    <Col lg={6} className="p-3">
-                        <Table className="resp-table2 center" bordered size="sm">
+                    <Col md={6}>
+                        <Table className="center" bordered size="sm">
                             <thead className="color text-white">
-                                <tr >
-                                    <th>Cost Component</th>
-                                    <th>In-house US</th>
-                                    <th>Nearshore</th>
-                                    <th>Offshore</th>
+                                <tr>
+                                    <th className="tablePr">Cost Component</th>
+                                    <th className="tablePr">In-house US</th>
+                                    <th className="tablePr">Nearshore</th>
+                                    <th className="tablePr">Offshore</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Man/Hours * On-Site Rate) + Off-Shore Man/Hours * Off-Shore Rate</Tooltip>}>
-                                        <td className="table-active text-blue hover">Project Team</td>
+                                        <td className="text-blue hover tablePr">Project Team</td>
                                     </OverlayTrigger>
-                                    <td>${comas(PTCInHouse)}</td>
-                                    <td>${comas(PTCNear)}</td>
-                                    <td>${comas(PTCOff)}</td>
+                                    <td className="tablePr">${comas(PTCInHouse)}</td>
+                                    <td className="tablePr">${comas(PTCNear)}</td>
+                                    <td className="tablePr">${comas(PTCOff)}</td>
                                 </tr>
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * Project Overhead Percentage</Tooltip>}>
-                                    <td className="table-active text-blue hover">Project Overhead</td>
+                                        <td className="tablePr text-blue hover">Project Overhead</td>
                                     </OverlayTrigger>
-                                    <td>-</td>
-                                    <td>${comas(POCNear)}</td>
-                                    <td>${comas(POCOff)}</td>
+                                    <td className="tablePr">-</td>
+                                    <td className="tablePr">${comas(POCNear)}</td>
+                                    <td className="tablePr">${comas(POCOff)}</td>
                                 </tr>
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Attrition Rate (%) * Number of Resources*Time to be productive * Rate</Tooltip>}>
-                                    <td className="table-active text-blue hover">Vendor's Attrition</td>
+                                        <td className="tablePr text-blue hover">Vendor's Attrition</td>
                                     </OverlayTrigger>
-                                    <td>-</td>
-                                    <td>${comas(CVANear())}</td>
-                                    <td>${comas(CVAOff())}</td>
+                                    <td className="tablePr">-</td>
+                                    <td className="tablePr">${comas(CVANear())}</td>
+                                    <td className="tablePr">${comas(CVAOff())}</td>
                                 </tr>
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Resources * Monthly Facility Use Cost per Resource * Number of Months</Tooltip>}>
-                                    <td className="table-active text-blue hover">On-site Resources Allocation</td>
-                                  </OverlayTrigger>
-                                    <td>-</td>
-                                    <td>${comas(ORACNear())}</td>
-                                    <td>${comas(ORACOff())}</td>
+                                        <td className="tablePr text-blue hover">On-site Resources Allocation</td>
+                                    </OverlayTrigger>
+                                    <td className="tablePr">-</td>
+                                    <td className="tablePr">${comas(ORACNear())}</td>
+                                    <td className="tablePr">${comas(ORACOff())}</td>
                                 </tr>
-{/*
+                                {/*
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Number of LD Minutes/Month * LD Rate * Duration of Engagement in Months</Tooltip>}>
                                     <td className="table-active text-blue hover">Long Distance</td>
@@ -336,62 +334,63 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
                                 */}
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * KT Overhead Percentage</Tooltip>}>
-                                    <td className="table-active text-blue hover">Knowledge Transfer</td>
-                                   </OverlayTrigger>
-                                    <td>-</td>
-                                    <td>${comas(KTCNear)}</td>
-                                    <td>${comas(KTCOff)}</td>
+                                        <td className="tablePr text-blue hover">Knowledge Transfer</td>
+                                    </OverlayTrigger>
+                                    <td className="tablePr">-</td>
+                                    <td className="tablePr">${comas(KTCNear)}</td>
+                                    <td className="tablePr">${comas(KTCOff)}</td>
                                 </tr>
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Airfares + Hotel Fares + car rental fees + perdiem</Tooltip>}>
-                                    <td className="table-active text-blue hover">Project Trips</td>
+                                        <td className="tablePr text-blue hover">Project Trips</td>
                                     </OverlayTrigger>
-                                    <td>-</td>
-                                    <td>${comas(PTCostNear())}</td>
-                                    <td>${comas(PTCostOff())}</td>
+                                    <td className="tablePr">-</td>
+                                    <td className="tablePr">${comas(PTCostNear())}</td>
+                                    <td className="tablePr">${comas(PTCostOff())}</td>
                                 </tr>
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Off-Shore Man/Hours * Off-Shore Rate * Productivity Loss Percentage</Tooltip>}>
-                                    <td className="table-active text-blue hover">Productivity Losses</td>
+                                        <td className="tablePr text-blue hover">Productivity Losses</td>
                                     </OverlayTrigger>
-                                    <td>-</td>
-                                    <td>${comas(PLCNear)}</td>
-                                    <td>${comas(PLCOff)}</td>
+                                    <td className="tablePr">-</td>
+                                    <td className="tablePr">${comas(PLCNear)}</td>
+                                    <td className="tablePr">${comas(PLCOff)}</td>
                                 </tr>
                                 <tr>
                                     <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Subtotal Engagement Cost * Risk Management Percentage</Tooltip>}>
-                                    <td className="table-active text-blue hover">Risk Management</td>
+                                        <td className="tablePr text-blue hover">Risk Management</td>
                                     </OverlayTrigger>
-                                    <td>-</td>
-                                    <td>${comas(RMCNear)}</td>
-                                    <td>${comas(RMCOff)}</td>
+                                    <td className="tablePr">-</td>
+                                    <td className="tablePr">${comas(RMCNear)}</td>
+                                    <td className="tablePr">${comas(RMCOff)}</td>
                                 </tr>
-                                <tr className="table-active">
-                                    <td>Total Cost</td>
-                                    <td>${comas(PTCInHouse)}</td>
-                                    <td>${comas(TCENear)}</td>
-                                    <td>${comas(TCEOff)}</td>
+                                <tr>
+                                    <td className="tablePr">Total Cost</td>
+                                    <td className="tablePr">${comas(PTCInHouse)}</td>
+                                    <td className="tablePr">${comas(TCENear)}</td>
+                                    <td className="tablePr">${comas(TCEOff)}</td>
                                 </tr>
                             </tbody>
                         </Table>
-                        <br></br>
-                        <center>
-                            <div>
-                                <Button
-                                    className="sendEmail"
-                                    variant="primary"
-                                    onClick={handleShow}
-                                    disabled={btnDisabled()}>
-                                    Send Cost
-                            </Button>
-                            </div>
-                        </center>
                     </Col>
-                    <Col lg={6}>
-                        <ReactApexChart options={options} series={series} type="bar" height={500} />
+                    <Col md={6}>
+                        <ReactApexChart options={options} series={series} type="bar" height={370} />
                     </Col>
                 </Row>
-                <Modal show={show} onHide={handleClose}>
+                <Row>
+                    <Col className="center m-4">
+                        <h4 className="text-blue">Done building your team?</h4>
+                        <Button
+                            className="sendEmail"
+                            variant="primary"
+                            onClick={handleShow}
+                            disabled={btnDisabled()}>
+                            Send Cost
+                            </Button>
+                    </Col>
+                </Row>
+            </Container>
+            <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Total Cost of Engagement</Modal.Title>
                     </Modal.Header>
@@ -402,7 +401,6 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
                             sr={sr}
                             tech={tech}
                             qa={qa}
-                            engMan={engMan}
                             month={month}
                         
                             PTCNear={comas(PTCNear)}
@@ -431,8 +429,7 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, engMan, qa, month, pric
                         ></FormEmail>
                     </Modal.Body>
                 </Modal>
-            </Container>
-        </>
+        </div>
     )
 };
 
