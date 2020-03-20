@@ -8,43 +8,16 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Container, Accordion, Card, Table } from 'react-bootstrap';
 
-export default function FormEmail({ PTCNear,
-  jr,
-  mid,
-  sr,
-  tech,
-  qa,
-  month,
-
-  PTCOff,
-  POCNear,
-  POCOff,
-  CVANear,
-  CVAOff,
-  ORACOff,
-  ORACNear,
-  //LDCNear,
-  //LDCOff,
-  KTCNear,
-  KTCOff,
-  PTCostNear,
-  PTCostOff,
-  PLCNear,
-  PLCOff,
-  RMCNear,
-  RMCOff,
-  handleClose,
-
-  PTCInHouse,
-  TCENear,
-  TCEOff }) {
+export default function FormEmail({ PTCNear, jr, mid, sr, tech, qa, month,
+  PTCOff, POCNear, POCOff, CVANear, CVAOff, ORACOff, ORACNear, KTCNear, KTCOff, PTCostNear, PTCostOff, PLCNear, PLCOff, RMCNear, RMCOff, handleClose,
+  PTCInHouse, TCENear, TCEOff }) {
 
   function handleSubmit(e) {
     e.preventDefault();
     setLoading(true)
     if (sendEmail(e) === true) {
       setLoading(false)
-      swal("Email Sent!", "Check your", "success").then(() => {
+      swal("Email Sent!", "", "success").then(() => {
         handleClose()
       });
     } else {
@@ -67,7 +40,7 @@ export default function FormEmail({ PTCNear,
               <h3 className="total-price">Nearshore total cost: <h3 style={{ color: '#0087ff' }}>${TCENear}</h3></h3>
               <h3 className="total-price">Offshore total cost: <h3 style={{ color: '#0087ff' }}>${TCEOff}</h3></h3>
             </div>
-            <div style={{ textAlign: "center"}}>
+            <div style={{ textAlign: "center" }}>
               <Accordion>
                 <Accordion.Toggle as={Button} size="sm" variant="primary" eventKey="0" >
                   Team Composition
@@ -75,56 +48,46 @@ export default function FormEmail({ PTCNear,
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
                     <Row >
-                    <Col md={2}></Col>
-                        <Col md={8}>
-                            <Table className="resp-table2 center" bordered size="sm">
-                                <thead className="tex-white">
-                                    <tr className="color">
-                                        <th>Developers/Engineers</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                     <td>Lead Developer</td>  
-                                        <td>
-                                            {tech}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Senior Developer</td>
-                                        <td>
-                                            {sr}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mid-Level Developer</td>
-                                        <td>
-                                            {mid}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Junior Developer</td>
-                                        <td>
-                                            {jr}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>QA Engineer</td>
-                                        <td>
-                                            {qa}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </Col>
-                        <Col md={2}></Col>
+                      <Col md={2}></Col>
+                      <Col md={8}>
+                        <Table className="resp-table2 center" bordered size="sm">
+                          <thead className="tex-white">
+                            <tr className="color">
+                              <th>Role</th>
+                              <th>Quantity</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Lead Developer</td>
+                              <td>{tech}</td>
+                            </tr>
+                            <tr>
+                              <td>Senior Developer</td>
+                              <td>{sr}</td>
+                            </tr>
+                            <tr>
+                              <td>Mid-Level Developer</td>
+                              <td>{mid}</td>
+                            </tr>
+                            <tr>
+                              <td>Junior Developer</td>
+                              <td>{jr}</td>
+                            </tr>
+                            <tr>
+                              <td>QA Engineer</td>
+                              <td>{qa}</td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </Col>
+                      <Col md={2}></Col>
                     </Row>
                   </Card.Body>
                 </Accordion.Collapse>
               </Accordion>
             </div>
-            <p className="body-text">Please complete this form below to send you an email with the Total Cost of Engagement and the Team Composition</p>
+            <p className="body-text">Please complete the form below to send you an email with the Total Cost of Engagement and the Team Composition</p>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Control type="email" placeholder="Email Address" name="user_email" required />

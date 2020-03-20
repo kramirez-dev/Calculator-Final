@@ -30,23 +30,24 @@ code {
       width: 5%;
       margin-left: 11px;
     }
+    img {
+        top: -120px;
+        width: 100%;
+      }
+      .container-envelope {
+        top: 100px;
+      }
+      .marLeft {
+        margin-left: 19px;
+      }
+      .sendEmailDiv {
+        text-align: right;
+      }
   }
 
 @media screen and (max-width: 900px) {
-  .btn-responsive {
-    padding:3px 5px;
-    margin: 0;
-    font-size:80%;
-    line-height: 1;
-  }
   h1{
     font-size: 25px;
-  }
-  .sendEmail {
-    padding:3px 5px;
-    margin: 0;
-    font-size:80%;
-    line-height: 1;
   }
   .tab {
     margin-bottom: 0;
@@ -63,6 +64,31 @@ code {
     width: 5%;
     margin-left: 11px;
   }
+  img {
+      width: 150%;
+    }
+    .graphLeft {
+      padding-left: -25px;
+    }
+    .sendEmailDiv {
+      text-align: center;
+    }
+    .tittles3 {
+      font-size: 25px;
+      margin-top: 10px;
+    }
+}
+
+.sendEmailDiv {
+  margin-top: 40px;
+}
+.padLeft {
+  padding-left:  30px;
+  padding-right:  30px;
+}
+
+.padLeftGraph {
+  margin-left: 0;
 }
 
 .center {
@@ -70,7 +96,7 @@ code {
 }
 
 .color {
-  background-color: #0087ff;
+  background-color: rgb(66, 133, 244);
 }
 
 .tex-white {
@@ -94,3 +120,64 @@ h1 {
  .tablePr {
   font-size: 12px;
  }
+
+ .asd {
+   margin: 0 10px 0 10px;
+ }
+
+ .asd1 {
+  margin: 20px 10px 0 10px;
+  height: 250px;
+}
+
+.totals {
+  background-color: #e9e9e9;
+}
+
+.responsive-banner {
+	margin: auto;
+	width: 100%;
+	position: relative;
+	height: auto;
+	min-height: 260px;
+	max-height: 400px;
+	overflow: hidden;
+	background-image: linear-gradient(to bottom right, #0087ff, #c1cdc1);
+}
+.container-envelope {
+	padding: 35px 15px;
+  color: #fff;
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  left: 0;
+}
+img {
+  position: absolute;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+h1.text-white {
+  font-weight: 900;
+}
+
+h4.text-white {
+  font-weight: 400;
+}
+
+.tittles3 {
+  font-weight: bolder;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}

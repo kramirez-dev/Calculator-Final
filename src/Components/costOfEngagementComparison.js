@@ -1,32 +1,28 @@
 import React, { useState } from 'react';
-import { Table, Container, Row, Col, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+import { Table, Col, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
 import ReactApexChart from 'react-apexcharts'
 import FormEmail from './form-email'
 
 
 function CostOfEngagementComparison({ jr, mid, sr, tech, qa, month, pricesInHouse, pricesNearShoreOffSite, pricesNearShoreOnSite, pricesOffShoreOffSite, pricesOffShoreOnSite }) {
 
-    //Valores necesarios en caso de que los limites de los devs Suban
     const jrNearOn = Math.round(jr / 25)
-    const midNearOn = Math.round(mid / 25) //25? Podria cambiar
+    const midNearOn = Math.round(mid / 15)
     const srNearOn = Math.round(sr / 10)
     const techNearOn = Math.round(tech / 5)
-    const qaNearOn = Math.round(qa / 25) //25? Podria cambiar
+    const qaNearOn = Math.round(qa / 25) 
 
-    //Valores necesarios en caso de que los limites de los devs Suban
     const jrOffOn = Math.round(jr / 25)
-    const midOffOn = Math.round(mid / 25) //25? Podria cambiar
+    const midOffOn = Math.round(mid / 15) 
     const srOffOn = Math.round(sr / 10)
     const techOffOn = Math.round(tech / 5)
-    const qaOffOn = Math.round(qa / 25) //25? Podria cambiar
+    const qaOffOn = Math.round(qa / 25) 
 
     //170 Valor fijo de la formula
     //Project Team Costs In Hose
-    //////////////////////////////cambiar 85 por 95 del tech
     const PTCInHouse = Math.round((jr * pricesInHouse.jr * 170 * month) + (mid * pricesInHouse.mid * 170 * month) + (sr * pricesInHouse.sr * 170 * month) + (tech * pricesInHouse.tech * 170 * month) + (qa * pricesInHouse.qa * 170 * month))
 
     //Project Team Costs NearShore
-    //////////////////////////////Cambiar valores de 40 a 46 
     const PTCNear = Math.round((jrNearOn * pricesNearShoreOnSite.jr * 170 * month) + (midNearOn * pricesNearShoreOnSite.mid * 170 * month) + (srNearOn * pricesNearShoreOnSite.sr * 170 * month) + (techNearOn * pricesNearShoreOnSite.tech * 170 * month) + (qaNearOn * pricesNearShoreOnSite.qa * 170 * month) +
         (jr * pricesNearShoreOffSite.jr * 170 * month) + (mid * pricesNearShoreOffSite.mid * 170 * month) + (sr * pricesNearShoreOffSite.sr * 170 * month) + (tech * pricesNearShoreOffSite.tech * 170 * month) + (qa * pricesNearShoreOffSite.qa * 170 * month))
 
@@ -146,18 +142,18 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, qa, month, pricesInHous
         if (month === 0) return true
         else return false
     }
-    
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+
 
     function btnDisabled() {
         if (valCerosMonth() === true || ceroMonth() === true)
             return true
-        else{
-                return false
+        else {
+            return false
         }
     }
 
@@ -254,182 +250,168 @@ function CostOfEngagementComparison({ jr, mid, sr, tech, qa, month, pricesInHous
             labels: {
                 show: !btnDisabled(),
                 formatter: function (val) {
-                    return "$" + comas(val);
+                    return "$" + commas(val);
                 }
             }
 
         },
         xaxis: {
             type: 'category',
-            categories: [['In-house',"$" + comas(PTCInHouse)], ['Nearshore', "$" + comas(TCENear)], ['Offshore',  "$" + comas(TCEOff)]],
+            categories: [['In-house', "$" + commas(PTCInHouse)], ['Nearshore', "$" + commas(TCENear)], ['Offshore', "$" + commas(TCEOff)]],
             axisBorder: {
                 show: false
             },
             labels: {
-                show: !btnDisabled()
+                show: true
             }
         }
     }
 
-    function comas(x) {
+    function commas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     return (
-        <div>
-            <Container>
-                <Row>
-                    <Col md={6}>
-                        <Table className="center" bordered size="sm">
-                            <thead className="color text-white">
-                                <tr>
-                                    <th className="tablePr">Cost Component</th>
-                                    <th className="tablePr">In-house US</th>
-                                    <th className="tablePr">Nearshore</th>
-                                    <th className="tablePr">Offshore</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Man/Hours * On-Site Rate) + Off-Shore Man/Hours * Off-Shore Rate</Tooltip>}>
-                                        <td className="text-blue hover tablePr">Project Team</td>
-                                    </OverlayTrigger>
-                                    <td className="tablePr">${comas(PTCInHouse)}</td>
-                                    <td className="tablePr">${comas(PTCNear)}</td>
-                                    <td className="tablePr">${comas(PTCOff)}</td>
-                                </tr>
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * Project Overhead Percentage</Tooltip>}>
-                                        <td className="tablePr text-blue hover">Project Overhead</td>
-                                    </OverlayTrigger>
-                                    <td className="tablePr">-</td>
-                                    <td className="tablePr">${comas(POCNear)}</td>
-                                    <td className="tablePr">${comas(POCOff)}</td>
-                                </tr>
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Attrition Rate (%) * Number of Resources*Time to be productive * Rate</Tooltip>}>
-                                        <td className="tablePr text-blue hover">Vendor's Attrition</td>
-                                    </OverlayTrigger>
-                                    <td className="tablePr">-</td>
-                                    <td className="tablePr">${comas(CVANear())}</td>
-                                    <td className="tablePr">${comas(CVAOff())}</td>
-                                </tr>
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Resources * Monthly Facility Use Cost per Resource * Number of Months</Tooltip>}>
-                                        <td className="tablePr text-blue hover">On-site Resources Allocation</td>
-                                    </OverlayTrigger>
-                                    <td className="tablePr">-</td>
-                                    <td className="tablePr">${comas(ORACNear())}</td>
-                                    <td className="tablePr">${comas(ORACOff())}</td>
-                                </tr>
-                                {/*
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Number of LD Minutes/Month * LD Rate * Duration of Engagement in Months</Tooltip>}>
-                                    <td className="table-active text-blue hover">Long Distance</td>
-                                    </OverlayTrigger>
-                                    <td>-</td>
-                                    <td>${comas(LDCNear())}</td>
-                                    <td>${comas(LDCOff())}</td>
-                                </tr>
-                                */}
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * KT Overhead Percentage</Tooltip>}>
-                                        <td className="tablePr text-blue hover">Knowledge Transfer</td>
-                                    </OverlayTrigger>
-                                    <td className="tablePr">-</td>
-                                    <td className="tablePr">${comas(KTCNear)}</td>
-                                    <td className="tablePr">${comas(KTCOff)}</td>
-                                </tr>
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Airfares + Hotel Fares + car rental fees + perdiem</Tooltip>}>
-                                        <td className="tablePr text-blue hover">Project Trips</td>
-                                    </OverlayTrigger>
-                                    <td className="tablePr">-</td>
-                                    <td className="tablePr">${comas(PTCostNear())}</td>
-                                    <td className="tablePr">${comas(PTCostOff())}</td>
-                                </tr>
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Off-Shore Man/Hours * Off-Shore Rate * Productivity Loss Percentage</Tooltip>}>
-                                        <td className="tablePr text-blue hover">Productivity Losses</td>
-                                    </OverlayTrigger>
-                                    <td className="tablePr">-</td>
-                                    <td className="tablePr">${comas(PLCNear)}</td>
-                                    <td className="tablePr">${comas(PLCOff)}</td>
-                                </tr>
-                                <tr>
-                                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Subtotal Engagement Cost * Risk Management Percentage</Tooltip>}>
-                                        <td className="tablePr text-blue hover">Risk Management</td>
-                                    </OverlayTrigger>
-                                    <td className="tablePr">-</td>
-                                    <td className="tablePr">${comas(RMCNear)}</td>
-                                    <td className="tablePr">${comas(RMCOff)}</td>
-                                </tr>
-                                <tr>
-                                    <td className="tablePr">Total Cost</td>
-                                    <td className="tablePr">${comas(PTCInHouse)}</td>
-                                    <td className="tablePr">${comas(TCENear)}</td>
-                                    <td className="tablePr">${comas(TCEOff)}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Col>
-                    <Col md={6}>
-                        <ReactApexChart options={options} series={series} type="bar" height={370} />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className="center m-4">
-                        <h4 className="text-blue">Done building your team?</h4>
-                        <Button
-                            className="sendEmail"
-                            variant="primary"
-                            onClick={handleShow}
-                            disabled={btnDisabled()}>
-                            Send Cost
-                            </Button>
-                    </Col>
-                </Row>
-            </Container>
+        <>
+         <Col lg={5} md={6}>
+                <h3 className="tittles3 ml-3">Graph</h3>
+                <ReactApexChart className="padLeftGraph" options={options} series={series} type="bar" height={530}/>
+            </Col>
+            <Col lg={4}>
+                <h3  className="tittles3">Team Cost</h3>
+                <Table className="center asd1" bordered size="sm">
+                    <thead className="color text-white">
+                        <tr>
+                            <th className="tablePr">Cost Component</th>
+                            <th className="tablePr">In-house US</th>
+                            <th className="tablePr">Nearshore</th>
+                            <th className="tablePr">Offshore</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Man/Hours * On-Site Rate) + Off-Shore Man/Hours * Off-Shore Rate</Tooltip>}>
+                                <td className="text-blue hover tablePr left">Project Team</td>
+                            </OverlayTrigger>
+                            <td className="tablePr">${commas(PTCInHouse)}</td>
+                            <td className="tablePr">${commas(PTCNear)}</td>
+                            <td className="tablePr">${commas(PTCOff)}</td>
+                        </tr>
+                        <tr>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * Project Overhead Percentage</Tooltip>}>
+                                <td className="tablePr text-blue hover left">Project Overhead</td>
+                            </OverlayTrigger>
+                            <td className="tablePr">-</td>
+                            <td className="tablePr">${commas(POCNear)}</td>
+                            <td className="tablePr">${commas(POCOff)}</td>
+                        </tr>
+                        <tr>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Attrition Rate (%) * Number of Resources*Time to be productive * Rate</Tooltip>}>
+                                <td className="tablePr text-blue hover left">Vendor's Attrition</td>
+                            </OverlayTrigger>
+                            <td className="tablePr">-</td>
+                            <td className="tablePr">${commas(CVANear())}</td>
+                            <td className="tablePr">${commas(CVAOff())}</td>
+                        </tr>
+                        <tr>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> On-Site Resources * Monthly Facility Use Cost per Resource * Number of Months</Tooltip>}>
+                                <td className="tablePr text-blue hover left">On-site Resources Allocation</td>
+                            </OverlayTrigger>
+                            <td className="tablePr">-</td>
+                            <td className="tablePr">${commas(ORACNear())}</td>
+                            <td className="tablePr">${commas(ORACOff())}</td>
+                        </tr>
+                        <tr>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Project Team Costs * KT Overhead Percentage</Tooltip>}>
+                                <td className="tablePr text-blue hover left">Knowledge Transfer</td>
+                            </OverlayTrigger>
+                            <td className="tablePr">-</td>
+                            <td className="tablePr">${commas(KTCNear)}</td>
+                            <td className="tablePr">${commas(KTCOff)}</td>
+                        </tr>
+                        <tr>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Airfares + Hotel Fares + car rental fees + perdiem</Tooltip>}>
+                                <td className="tablePr text-blue hover left">Project Trips</td>
+                            </OverlayTrigger>
+                            <td className="tablePr">-</td>
+                            <td className="tablePr">${commas(PTCostNear())}</td>
+                            <td className="tablePr">${commas(PTCostOff())}</td>
+                        </tr>
+                        <tr>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Off-Shore Man/Hours * Off-Shore Rate * Productivity Loss Percentage</Tooltip>}>
+                                <td className="tablePr text-blue hover left">Productivity Losses</td>
+                            </OverlayTrigger>
+                            <td className="tablePr">-</td>
+                            <td className="tablePr">${commas(PLCNear)}</td>
+                            <td className="tablePr">${commas(PLCOff)}</td>
+                        </tr>
+                        <tr>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"> Subtotal Engagement Cost * Risk Management Percentage</Tooltip>}>
+                                <td className="tablePr text-blue hover left">Risk Management</td>
+                            </OverlayTrigger>
+                            <td className="tablePr">-</td>
+                            <td className="tablePr">${commas(RMCNear)}</td>
+                            <td className="tablePr">${commas(RMCOff)}</td>
+                        </tr>
+                        <tr className="totals">
+                            <td className="tablePr bold right">Total Cost (USD)</td>
+                            <td className="tablePr bold">${commas(PTCInHouse)}</td>
+                            <td className="tablePr bold">${commas(TCENear)}</td>
+                            <td className="tablePr bold">${commas(TCEOff)}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+                <div className="sendEmailDiv">
+                <h3 className="text-blue tittles3">Done building your team?</h3>
+                    <Button
+                        className="sendEmail"
+                        variant="primary"
+                        onClick={handleShow}
+                        disabled={btnDisabled()}>
+                        Send Cost
+                    </Button>
+                    </div>
+            </Col>
+
             <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Total Cost of Engagement</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <FormEmail
-                            jr={jr}
-                            mid={mid}
-                            sr={sr}
-                            tech={tech}
-                            qa={qa}
-                            month={month}
-                        
-                            PTCNear={comas(PTCNear)}
-                            PTCOff={comas(PTCOff)}
-                            POCNear={comas(POCNear)}
-                            POCOff={comas(POCOff)}
-                            CVANear={comas(CVANear())}
-                            CVAOff={comas(CVAOff())}
-                            ORACOff={comas(ORACOff())}
-                            //LDCNear={comas(LDCNear())}
-                            //LDCOff={comas(LDCOff())}
-                            KTCNear={comas(KTCNear)}
-                            KTCOff={comas(KTCOff)}
-                            PTCostNear={comas(PTCostNear())}
-                            PTCostOff={comas(PTCostOff())}
-                            PLCNear={comas(PLCNear)}
-                            PLCOff={comas(PLCOff)}
-                            RMCNear={comas(RMCNear)}
-                            RMCOff={comas(RMCOff)}
+                <Modal.Header closeButton>
+                    <Modal.Title>Total Cost of Engagement (USD)</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <FormEmail
+                        jr={jr}
+                        mid={mid}
+                        sr={sr}
+                        tech={tech}
+                        qa={qa}
+                        month={month}
+
+                        PTCNear={commas(PTCNear)}
+                        PTCOff={commas(PTCOff)}
+                        POCNear={commas(POCNear)}
+                        POCOff={commas(POCOff)}
+                        CVANear={commas(CVANear())}
+                        CVAOff={commas(CVAOff())}
+                        ORACOff={commas(ORACOff())}
+                        ORACNear={commas(ORACNear())}
+                        KTCNear={commas(KTCNear)}
+                        KTCOff={commas(KTCOff)}
+                        PTCostNear={commas(PTCostNear())}
+                        PTCostOff={commas(PTCostOff())}
+                        PLCNear={commas(PLCNear)}
+                        PLCOff={commas(PLCOff)}
+                        RMCNear={commas(RMCNear)}
+                        RMCOff={commas(RMCOff)}
 
 
-                            PTCInHouse={comas(PTCInHouse)}
-                            TCENear={comas(TCENear)}
-                            TCEOff={comas(TCEOff)}
-                            handleClose={handleClose}
-                        ></FormEmail>
-                    </Modal.Body>
-                </Modal>
-        </div>
+                        PTCInHouse={commas(PTCInHouse)}
+                        TCENear={commas(TCENear)}
+                        TCEOff={commas(TCEOff)}
+                        handleClose={handleClose}
+                    ></FormEmail>
+                </Modal.Body>
+            </Modal>
+        </>
     )
 };
 

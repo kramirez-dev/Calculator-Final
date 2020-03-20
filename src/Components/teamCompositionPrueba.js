@@ -1,3 +1,4 @@
+/*
 import Select from 'react-select'
 
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
@@ -104,7 +105,7 @@ export default class TeamCompositionFun extends React.Component {
             selectedprueba,
             month: selectedprueba.value,
         });*/
-    };
+  /*  };
 
     handleResetValues = () => {
         console.log(this.state.jr)
@@ -174,9 +175,9 @@ export default class TeamCompositionFun extends React.Component {
                       backgroundColor: !isDisabled && (isSelected ? "white" : "green"),
                     },
                 };
-            },*/
-        }
-        return (
+            },
+        }*/
+        /*return (
             <div>
                 <Container className="mt-4">
                     <h1 className="center text-blue mb-4">Total Cost of Engagement Calculators</h1>
@@ -309,7 +310,7 @@ export default class TeamCompositionFun extends React.Component {
                             </Table>
                         </Col>
                     </Row>
-        {*/}
+        
                 </Container>
                 <CostOfEngagementComparisonComponent
                     jr={this.state.jr}
@@ -322,7 +323,7 @@ export default class TeamCompositionFun extends React.Component {
             </div>
         );
     }
-}
+}*/
 
 /*
 import React, { useState } from 'react';

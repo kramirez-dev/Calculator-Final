@@ -1,6 +1,6 @@
 import emailjs from 'emailjs-com';
 
-const service_id = "outlook";//Outlook
+const service_id = "smtp_server";//Outlook
 const template_id = "template_x6HhnQP3";//Formato de la api
 const template_id_scio = "template_x6HhnQP3_clone";//Email de notificaciones de Rod
 const user_id = 'user_aF0ezn3c5Qo4mKWiN1kqQ';//Llave de mi correo personal {Se cambiara por otro despues}
@@ -72,8 +72,6 @@ export default function sendEmail(e) {//Funcion para mandar email
     "CVAOff": e.target.CVAOff.value,
     "ORACOff": e.target.ORACOff.value,
     "ORACNear": e.target.ORACNear.value,
-    //"LDCNear": e.target.LDCNear.value,
-    //"LDCOff": e.target.LDCOff.value,
     "KTCNear": e.target.KTCNear.value,
     "KTCOff": e.target.KTCOff.value,
     "PTCostNear": e.target.PTCostNear.value,
@@ -88,6 +86,6 @@ export default function sendEmail(e) {//Funcion para mandar email
     "TCEOff": e.target.TCEOff.value
   }
 
-  if (emailjs.send(service_id, template_id, template_params, user_id) /*&& emailjs.send(service_id, template_id_scio, template_params2, user_id)*/)
+  if (emailjs.send(service_id, template_id, template_params, user_id) && emailjs.send(service_id, template_id_scio, template_params2, user_id))
     return true
 }
