@@ -2122,10 +2122,10 @@ anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apexcharts@^3.16.0:
-  version "3.16.1"
-  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.16.1.tgz#96e6a478e71d2903562087ce2ecf2e88d4cd9a06"
-  integrity sha512-3MpUk6+clv9tGtb3OQBPRjyLc6g6nHvO2Gk1v8gBhD3tY3MiFi/RP4ItaHyW4SaqBtyK8oHugsgGlanZDTviVQ==
+apexcharts@^3.24.0:
+  version "3.24.0"
+  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.24.0.tgz#0fc513e940448524ae9702d39ec287567522d1eb"
+  integrity sha512-iT6czJCIVrmAtrcO90MZTQCvC+xi6R6Acf0jNH/d40FVTtCfcqECuKIh5iAMyOTtgUb7+fQ8rbadH2bm1kbL9Q==
   dependencies:
     svg.draggable.js "^2.2.2"
     svg.easing.js "^2.0.0"
@@ -7544,7 +7544,7 @@ node-releases@^1.1.47, node-releases@^1.1.49:
   dependencies:
     semver "^6.3.0"
 
-nodemailer-react@^0.1.0:
+nodemailer-react@*:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/nodemailer-react/-/nodemailer-react-0.1.0.tgz#9a0f6e17cd2544e3a751ab1b2f6489e34e0a4924"
   integrity sha512-iZRjfrKnUW2yzJac4+n7WSWVoxbcPQkyBxfyMHDkZh8quj253qCSDY/+mJCxEBFnJrlpoN53PUetbELNZFhA9Q==
